@@ -1,0 +1,15 @@
+public class Solution {
+    public int NumberOfSubarrays(int[] nums, int k) {
+        Dictionary<int,int> counts = new Dictionary<int,int>();
+        counts[0] = 1;
+        int ans = 0;
+        int curr = 0; // tracks the odd count
+
+        foreach(int num in nums){
+            curr += num % 2;
+            ans += counts.GetValueOrDefault(curr - k, 0);
+            counts[curr] = counts.GetValueOrDefault(curr, 0) + 1;
+        }
+        return ans;
+    }
+}
